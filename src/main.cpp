@@ -8,10 +8,10 @@
 #define TFT_DC 4
 #define TFT_CS 15
 #define TFT_RST 27
+
 int hall = hallRead();
-
-
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
+
 
 void ActualizeSensors(void * parameter){
   for(;;){ // infinite loop
@@ -19,6 +19,7 @@ void ActualizeSensors(void * parameter){
     vTaskDelay(500 / portTICK_PERIOD_MS);
   }
 }
+
 
 void setup() 
 {
@@ -43,19 +44,55 @@ void setup()
 
 void loop(void) 
 {
-  tft.fillRect(0, 0, 60, 17, ILI9341_BLUE);
-  tft.fillRect(70, 90, 180, 55, ILI9341_BLUE);
-  tft.fillRect(270, 0, 320, 17, ILI9341_BLUE);
-  tft.setCursor(70, 95);
+  tft.fillRect(0, 0, 60, 17, ILI9341_BLUE); //Hall
+  tft.fillRect(70, 70, 180, 55, ILI9341_BLUE); //Hour
+  tft.fillRect(270, 0, 320, 17, ILI9341_BLUE); //battery %
+  tft.fillRect(230, 220, 320, 240, ILI9341_BLUE); //Accel
+  tft.fillRect(0, 130, 135, 230, ILI9341_BLUE); //heigh & temp & pressure & humidity
+
+
+  tft.setCursor(70, 75); //hour
   tft.setTextSize(6);
   tft.println("14:10"); 
-  tft.setTextSize(2);
+
+  tft.setTextSize(2);  //battery %
   tft.setCursor(270, 0);
   tft.println("100%");
-  tft.setCursor(0, 0);
+
+  tft.setTextSize(2);
+  tft.setCursor(230, 225);  //accel
+  tft.print("16");
+  tft.println("m/s^2");
+
+  tft.setTextSize(2);  //hall
+  tft.setCursor(0, 0); 
   tft.print(hall);
   tft.setTextSize(1);
   tft.println("*");
-  delay(500);
-}
 
+  tft.setTextSize(2);  //heigh
+  tft.setCursor(0, 135); 
+  tft.print("1000");
+  tft.println("m a.s.l");
+
+  tft.setTextSize(2);  //temp
+  tft.setCursor(0, 165); 
+  tft.print("1000");
+  tft.setTextSize(1);
+  tft.print("*");
+  tft.setTextSize(2);
+  tft.println("C");
+
+  tft.setTextSize(2);  //heigh
+  tft.setCursor(0, 195); 
+  tft.print("1000");
+  tft.println("hPa");
+
+  tft.setTextSize(2);  //humidity
+  tft.setCursor(0, 225); 
+  tft.print("100");
+  tft.println("%");
+  
+
+  delay(300);
+}
