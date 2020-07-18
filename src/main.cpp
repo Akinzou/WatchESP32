@@ -44,14 +44,14 @@ void setup()
 
 void loop(void) 
 {
-  tft.fillRect(0, 0, 60, 17, ILI9341_BLUE); //Hall
-  tft.fillRect(70, 70, 180, 55, ILI9341_BLUE); //Hour
-  tft.fillRect(270, 0, 320, 17, ILI9341_BLUE); //battery %
-  tft.fillRect(230, 220, 320, 240, ILI9341_BLUE); //Accel
-  tft.fillRect(0, 130, 135, 230, ILI9341_BLUE); //heigh & temp & pressure & humidity
+  tft.fillRect(0, 0, 60, 17, ILI9341_BLACK); //Hall
+  tft.fillRect(70, 40, 180, 55, ILI9341_BLACK); //Hour
+  tft.fillRect(270, 0, 320, 17, ILI9341_BLACK); //battery %
+  tft.fillRect(230, 220, 320, 240, ILI9341_BLACK); //Accel
+  tft.fillRect(0, 130, 135, 230, ILI9341_BLACK); //heigh & temp & pressure & humidity
 
 
-  tft.setCursor(70, 75); //hour
+  tft.setCursor(70, 45); //hour
   tft.setTextSize(6);
   tft.println("14:10"); 
 
