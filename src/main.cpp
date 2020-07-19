@@ -51,31 +51,31 @@ void loop(void)
   tft.fillRect(0, 130, 135, 230, ILI9341_BLACK); //heigh & temp & pressure & humidity
 
 
-  tft.setCursor(70, 45); //hour
+  tft.setCursor(70, 45); //Hour
   tft.setTextSize(6);
   tft.println("14:10"); 
 
-  tft.setTextSize(2);  //battery %
+  tft.setTextSize(2);  //Battery %
   tft.setCursor(270, 0);
   tft.println("100%");
 
   tft.setTextSize(2);
-  tft.setCursor(230, 225);  //accel
+  tft.setCursor(230, 225);  //Accel
   tft.print("16");
   tft.println("m/s^2");
 
-  tft.setTextSize(2);  //hall
+  tft.setTextSize(2);  //Hall
   tft.setCursor(0, 0); 
   tft.print(hall);
   tft.setTextSize(1);
   tft.println("*");
 
-  tft.setTextSize(2);  //heigh
+  tft.setTextSize(2);  //Heigh
   tft.setCursor(0, 135); 
   tft.print("1000");
   tft.println("m a.s.l");
 
-  tft.setTextSize(2);  //temp
+  tft.setTextSize(2);  //Temp
   tft.setCursor(0, 165); 
   tft.print("1000");
   tft.setTextSize(1);
@@ -83,12 +83,12 @@ void loop(void)
   tft.setTextSize(2);
   tft.println("C");
 
-  tft.setTextSize(2);  //heigh
+  tft.setTextSize(2);  //Pressure
   tft.setCursor(0, 195); 
   tft.print("1000");
   tft.println("hPa");
 
-  tft.setTextSize(2);  //humidity
+  tft.setTextSize(2);  //Humidity
   tft.setCursor(0, 225); 
   tft.print("100");
   tft.println("%");
