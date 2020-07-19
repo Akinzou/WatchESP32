@@ -3,11 +3,7 @@
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
-
-
-#define TFT_DC 4
-#define TFT_CS 15
-#define TFT_RST 27
+#include "AS_V1_PINS.h"   // !!! Include PINS file !!!
 
 int hall = hallRead();
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
@@ -27,6 +23,7 @@ void setup()
   tft.fillScreen(ILI9341_BLACK);
   tft.setRotation(3);
   Serial.begin(9600);
+  tft.setSPISpeed(40000000);
 
   xTaskCreate
   (
