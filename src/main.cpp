@@ -23,7 +23,7 @@ void setup()
   tft.fillScreen(ILI9341_BLACK);
   tft.setRotation(3);
   Serial.begin(9600);
-  tft.setSPISpeed(40000000);
+  tft.setSPISpeed(SPIspeed);
 
   xTaskCreate
   (
