@@ -6,7 +6,7 @@
 #include "AS_V1_PINS.h"                     // !!! Include PINS file !!!
 #include "MAX31341.h"
 
-MAX31341 rtc();
+MAX31341 rtc(true);
 int hall = hallRead();
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 
@@ -15,7 +15,6 @@ void ActualizeSensors(void * parameter){
   for(;;){ // infinite loop
     hall = hallRead();
     vTaskDelay(500 / portTICK_PERIOD_MS);
-
   }
 }
 

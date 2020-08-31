@@ -17,10 +17,20 @@
 class MAX31341
 {
     public:
-        MAX31341();
         MAX31341(bool AD0);
 
         String GetSeconds();
-        
         void SetSeconds(int sec);
+
+        String GetMinutes();
+        void SetMinutes(int min);
+
+        String GetHours();
+        void SetHours(int H);
+
+        String GetDay();
+        void SetDay(int D);
+
+        String GetMonth();
+        void SetMonth(int D);
 };
