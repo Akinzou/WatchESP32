@@ -4,23 +4,44 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
 #include "AS_V1_PINS.h"                     // !!! Include PINS file !!!
-#include "MAX31341.h"
+#include <MAX31341.h>
+#include <Arduino-MAX17055_Driver.h>
+#include <Adafruit_BME280.h>
+#define SEALEVELPRESSURE_HPA 1013.25
 
-MAX31341 rtc(true);
+int temp;
+int pressure;
+int humidity;
+int altidute;
+int SOC;
 int hall = hallRead();
+
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
+MAX31341 rtc(true);
+MAX17055 battery;
+Adafruit_BME280 bme;
 
 
 void ActualizeSensors(void * parameter){
   for(;;){ // infinite loop
     hall = hallRead();
+    SOC = battery.getSOC();
+    temp = bme.readTemperature();
+    pressure = bme.readPressure();
+    humidity = bme.readHumidity();
+    altidute = bme.readAltitude(SEALEVELPRESSURE_HPA);
     vTaskDelay(500 / portTICK_PERIOD_MS);
   }
 }
 
-
 void setup() 
 {
+  battery.setCapacity(1000);
+  SOC = battery.getSOC();
+  temp = bme.readTemperature();
+  pressure = bme.readPressure();
+  humidity = bme.readHumidity();
+  altidute = bme.readAltitude(SEALEVELPRESSURE_HPA);
   tft.begin();
   tft.fillScreen(ILI9341_BLACK);
   tft.setRotation(3);
@@ -36,7 +57,6 @@ void setup()
   1,               // Task priority
   NULL             // Task handle
   );
-
 
 }
 
@@ -56,7 +76,7 @@ void loop(void)
 
   tft.setTextSize(2);         //Battery %
   tft.setCursor(270, 0);
-  tft.println("100%");
+  tft.println(SOC);
 
   tft.setTextSize(2);
   tft.setCursor(230, 225);    //Accel
@@ -69,14 +89,14 @@ void loop(void)
   tft.setTextSize(1);
   tft.println("*");
 
-  tft.setTextSize(2);        //Heigh
+  tft.setTextSize(2);        //altidute
   tft.setCursor(0, 135); 
-  tft.print("1000");
+  tft.print(altidute);
   tft.println("m a.s.l");
 
   tft.setTextSize(2);        //Temp
   tft.setCursor(0, 165); 
-  tft.print("1000");
+  tft.print(temp);
   tft.setTextSize(1);
   tft.print("*");
   tft.setTextSize(2);
@@ -84,12 +104,12 @@ void loop(void)
 
   tft.setTextSize(2);        //Pressure
   tft.setCursor(0, 195); 
-  tft.print("1000");
+  tft.print(pressure);
   tft.println("hPa");
 
   tft.setTextSize(2);        //Humidity
   tft.setCursor(0, 225); 
-  tft.print("100");
+  tft.print(humidity);
   tft.println("%");
   
 
