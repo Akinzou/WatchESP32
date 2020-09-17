@@ -7,20 +7,36 @@
 #include <MAX31341.h>
 #include <Arduino-MAX17055_Driver.h>
 #include <Adafruit_BME280.h>
-#define SEALEVELPRESSURE_HPA 1013.25
 
+int SEALEVELPRESSURE_HPA = 1013.25;
 int temp;
 int pressure;
 int humidity;
 int altidute;
 int SOC;
 int hall = hallRead();
+String command;
 
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 MAX31341 rtc(true);
 MAX17055 battery;
 Adafruit_BME280 bme;
 
+void ReadSerial()
+{
+  while(Serial.available() > 0)
+    {
+      char buffer = char(Serial.read());
+      if(buffer == '$')
+      {
+        break;
+      } 
+      else 
+      {
+        command += buffer;
+      }
+    }
+}
 
 void ActualizeSensors(void * parameter){
   for(;;){ // infinite loop
@@ -31,6 +47,24 @@ void ActualizeSensors(void * parameter){
     humidity = bme.readHumidity();
     altidute = bme.readAltitude(SEALEVELPRESSURE_HPA);
     vTaskDelay(500 / portTICK_PERIOD_MS);
+  }
+}
+
+void ReadSerialTask(void * parameter){
+  for(;;){ 
+    
+    command = "";
+    ReadSerial();
+
+    if (command == "A1")
+    {
+      command = "";
+      ReadSerial();
+      SEALEVELPRESSURE_HPA = atoi(command.c_str());
+      Serial.println("Sea LVL pressure: ");
+      Serial.print(SEALEVELPRESSURE_HPA);
+    }
+    
   }
 }
 
