@@ -58,7 +58,7 @@ void MAX31341::SetMinutes(int min)
     Wire.endTransmission();
 }
 
-String MAX31341::GetHours()
+String MAX31341::GetHour()
 {
     Wire.requestFrom(Hours, 7);
     while(Wire.available()) 
@@ -69,7 +69,7 @@ String MAX31341::GetHours()
     return requestBit;
 }
 
-void MAX31341::SetHours(int H)
+void MAX31341::SetHour(int H)
 {
     Wire.beginTransmission(DeviceAdress);
     Wire.write(Hours);
@@ -112,5 +112,24 @@ void MAX31341::SetMonth(int D)
     Wire.beginTransmission(DeviceAdress);
     Wire.write(Day);
     Wire.write(D);
+    Wire.endTransmission();
+}
+
+String MAX31341::GetYear()
+{
+    Wire.requestFrom(Year, 7);
+    while(Wire.available()) 
+        {
+            char requestByte = Wire.read();   
+            requestBit += requestByte;        
+        }
+    return requestBit;
+}
+
+void MAX31341::SetMonth(int Y)
+{
+    Wire.beginTransmission(DeviceAdress);
+    Wire.write(Year);
+    Wire.write(Y);
     Wire.endTransmission();
 }

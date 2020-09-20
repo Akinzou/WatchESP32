@@ -8,7 +8,7 @@
 #include <Arduino-MAX17055_Driver.h>
 #include <Adafruit_BME280.h>
 
-int SEALEVELPRESSURE_HPA = 1013.25;
+int SEALEVELPRESSURE_HPA = 1013;
 int temp;
 int pressure;
 int humidity;
@@ -55,6 +55,29 @@ void ReadSerialTask(void * parameter){
     
     command = "";
     ReadSerial();
+
+    if (command == "A0")
+    {
+      command = "";
+      ReadSerial();
+      rtc.SetYear(atoi(command.c_str()));
+      command = "";
+      ReadSerial();
+      rtc.SetMonth(atoi(command.c_str()));
+      command = "";
+      ReadSerial();
+      rtc.SetDay(atoi(command.c_str()));
+      command = "";
+      ReadSerial();
+      rtc.SetHour(atoi(command.c_str()));
+      command = "";
+      ReadSerial();
+      rtc.SetMinutes(atoi(command.c_str()));
+      command = "";
+      ReadSerial();
+      rtc.SetSeconds(atoi(command.c_str()));
+
+    }
 
     if (command == "A1")
     {
