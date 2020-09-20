@@ -25,12 +25,15 @@ class MAX31341
         String GetMinutes();
         void SetMinutes(int min);
 
-        String GetHours();
-        void SetHours(int H);
+        String GetHour();
+        void SetHour(int H);
 
         String GetDay();
         void SetDay(int D);
 
         String GetMonth();
         void SetMonth(int D);
+
+        String GetYear();
+        void SetYear(int Y);
 };
