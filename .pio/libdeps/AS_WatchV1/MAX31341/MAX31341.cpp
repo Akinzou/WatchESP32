@@ -107,11 +107,11 @@ String MAX31341::GetMonth()
     return requestBit;
 }
 
-void MAX31341::SetMonth(int D)
+void MAX31341::SetMonth(int M)
 {
     Wire.beginTransmission(DeviceAdress);
-    Wire.write(Day);
-    Wire.write(D);
+    Wire.write(Month);
+    Wire.write(M);
     Wire.endTransmission();
 }
 
@@ -126,7 +126,7 @@ String MAX31341::GetYear()
     return requestBit;
 }
 
-void MAX31341::SetMonth(int Y)
+void MAX31341::SetYear(int Y)
 {
     Wire.beginTransmission(DeviceAdress);
     Wire.write(Year);

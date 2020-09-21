@@ -7,6 +7,8 @@
 #include <MAX31341.h>
 #include <Arduino-MAX17055_Driver.h>
 #include <Adafruit_BME280.h>
+#include <SPI.h>
+#include <SD.h>
 
 int SEALEVELPRESSURE_HPA = 1013;
 int temp;
@@ -93,6 +95,7 @@ void ReadSerialTask(void * parameter){
 
 void setup() 
 {
+  SD.begin(5);
   battery.setCapacity(1000);
   SOC = battery.getSOC();
   temp = bme.readTemperature();
