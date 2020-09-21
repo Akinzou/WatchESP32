@@ -95,7 +95,7 @@ void ReadSerialTask(void * parameter){
 
 void setup() 
 {
-  SD.begin(4);
+  SD.begin(5);
   battery.setCapacity(1000);
   SOC = battery.getSOC();
   temp = bme.readTemperature();
