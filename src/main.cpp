@@ -10,7 +10,6 @@
 #include <SPI.h>
 #include <SD.h>
 
-
 int SEALEVELPRESSURE_HPA = 1013;
 int temp;
 int pressure;
@@ -96,6 +95,7 @@ void ReadSerialTask(void * parameter){
 
 void setup() 
 {
+  SD.begin(4);
   battery.setCapacity(1000);
   SOC = battery.getSOC();
   temp = bme.readTemperature();
