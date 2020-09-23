@@ -24,6 +24,7 @@ MAX31341 rtc(true);
 MAX17055 battery;
 Adafruit_BME280 bme;
 
+
 void ReadSerial()
 {
   while(Serial.available() > 0)
@@ -52,6 +53,25 @@ void ActualizeSensors(void * parameter){
   }
 }
 
+void InitSDcard(void * parameter){
+  for(;;){ // infinite loop
+    SD.begin(5);
+    if (!SD.begin(5)) 
+    {
+      Serial.println("initialization failed. Things to check:");
+      Serial.println("* is a card inserted?");
+      Serial.println("* is your wiring correct?");
+      Serial.println("* did you change the chipSelect pin to match your shield or module?");
+    }
+
+    else 
+    {
+      File FileSD = SD.open("data.txt");
+      Serial.println("Wiring is correct and a card is present.");
+    }
+  }
+}
+
 void ReadSerialTask(void * parameter){
   for(;;){ 
     
@@ -60,6 +80,7 @@ void ReadSerialTask(void * parameter){
 
     if (command == "A0")
     {
+
       command = "";
       ReadSerial();
       rtc.SetYear(atoi(command.c_str()));
@@ -93,9 +114,10 @@ void ReadSerialTask(void * parameter){
   }
 }
 
+
 void setup() 
 {
-  SD.begin(5);
+
   battery.setCapacity(1000);
   SOC = battery.getSOC();
   temp = bme.readTemperature();

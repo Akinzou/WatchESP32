@@ -36,3 +36,6 @@
 .pio/build/AS_WatchV1/firmware.bin
 .pio/build/AS_WatchV1/.sconsign37.dblite
 .pio/build/AS_WatchV1/longcmd-2a4d9c0cebed33ecc34562054e8547da
+.pio/build/AS_WatchV1/firmware.elf
+.pio/build/AS_WatchV1/firmware.bin
+.pio/build/AS_WatchV1/.sconsign37.dblite
