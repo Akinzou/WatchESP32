@@ -17,6 +17,7 @@ int humidity;
 int altidute;
 int SOC;
 int hall = hallRead();
+String DataFromFile;
 String command;
 
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
@@ -55,20 +56,14 @@ void ActualizeSensors(void * parameter){
 
 void InitSDcard(void * parameter){
   for(;;){ // infinite loop
+  
     SD.begin(5);
-    if (!SD.begin(5)) 
-    {
-      Serial.println("initialization failed. Things to check:");
-      Serial.println("* is a card inserted?");
-      Serial.println("* is your wiring correct?");
-      Serial.println("* did you change the chipSelect pin to match your shield or module?");
-    }
-
-    else 
+    if (SD.begin(5)) 
     {
       File FileSD = SD.open("data.txt");
-      Serial.println("Wiring is correct and a card is present.");
+      DataFromFile = FileSD.read();
     }
+
   }
 }
 
