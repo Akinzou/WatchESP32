@@ -10,6 +10,7 @@
 #include <SPI.h>
 #include <SD.h>
 
+bool SDconnection = false;
 int SEALEVELPRESSURE_HPA = 1013;
 int temp;
 int pressure;
@@ -25,6 +26,14 @@ MAX31341 rtc(true);
 MAX17055 battery;
 Adafruit_BME280 bme;
 
+
+void ShowNotification(String Notification)
+{
+  tft.fillRect(10, 10, 300, 30, ILI9341_LIGHTGREY);
+  tft.setTextSize(2);
+  tft.setCursor(30, 20); 
+  tft.print(Notification);
+}
 
 void ReadSerial()
 {
@@ -56,14 +65,28 @@ void ActualizeSensors(void * parameter){
 
 void InitSDcard(void * parameter){
   for(;;){ // infinite loop
-  
+
     SD.begin(5);
     if (SD.begin(5)) 
     {
+      if(!SDconnection)
+      {
+        ShowNotification("SD has been detected");
+        SDconnection = true;
+      }
       File FileSD = SD.open("data.txt");
       DataFromFile = FileSD.read();
     }
 
+    else
+    {
+      if(SDconnection)
+      {
+        ShowNotification("SD has been detected");
+        SDconnection = false;
+      }
+    }
+    
   }
 }
 
