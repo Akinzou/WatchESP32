@@ -39,3 +39,9 @@
 .pio/build/AS_WatchV1/firmware.elf
 .pio/build/AS_WatchV1/firmware.bin
 .pio/build/AS_WatchV1/.sconsign37.dblite
+platformio.ini
+.pio/build/project.checksum
+.pio/build/AS_WatchV1/.sconsign37.dblite
+.pio/build/AS_WatchV1/firmware.bin
+.pio/build/AS_WatchV1/firmware.elf
+.pio/build/AS_WatchV1/longcmd-4dcd8132662cfb12c280601f0b37d224

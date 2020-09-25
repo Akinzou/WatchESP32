@@ -8,6 +8,7 @@
             "includePath": [
                 "c:/Users/wikto/Desktop/WatchESP32/include",
                 "c:/Users/wikto/Desktop/WatchESP32/src",
+                "c:/Users/wikto/Desktop/WatchESP32/.pio/libdeps/AS_WatchV1/arduino_timer/src",
                 "C:/Users/wikto/.platformio/packages/framework-arduinoespressif32/libraries/SD/src",
                 "C:/Users/wikto/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
                 "c:/Users/wikto/Desktop/WatchESP32/.pio/libdeps/AS_WatchV1/Adafruit BME280 Library",
@@ -110,6 +111,7 @@
                 "path": [
                     "c:/Users/wikto/Desktop/WatchESP32/include",
                     "c:/Users/wikto/Desktop/WatchESP32/src",
+                    "c:/Users/wikto/Desktop/WatchESP32/.pio/libdeps/AS_WatchV1/arduino_timer/src",
                     "C:/Users/wikto/.platformio/packages/framework-arduinoespressif32/libraries/SD/src",
                     "C:/Users/wikto/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
                     "c:/Users/wikto/Desktop/WatchESP32/.pio/libdeps/AS_WatchV1/Adafruit BME280 Library",
