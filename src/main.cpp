@@ -9,8 +9,11 @@
 #include <Adafruit_BME280.h>
 #include <SPI.h>
 #include <SD.h>
+#include <timer.h>
 
+auto timer = timer_create_default();
 bool SDconnection = false;
+int ShowingNot = false;
 int SEALEVELPRESSURE_HPA = 1013;
 int temp;
 int pressure;
@@ -26,13 +29,29 @@ MAX31341 rtc(true);
 MAX17055 battery;
 Adafruit_BME280 bme;
 
+bool ChangeNotificationStatus(void *)
+{
+  int ShowingNot = false;
+  return true;
+}
 
-void ShowNotification(String Notification)
+void Notification(String text)
 {
   tft.fillRect(10, 10, 300, 30, ILI9341_LIGHTGREY);
   tft.setTextSize(2);
   tft.setCursor(30, 20); 
-  tft.print(Notification);
+  tft.print(text);
+}
+
+void ShowNotification(String text, int time)
+{
+  int ShowingNot = true;
+  if(ShowingNot == true)
+  {
+    Notification(text);
+  }
+  timer.every(time, ChangeNotificationStatus);
+
 }
 
 void ReadSerial()
@@ -71,7 +90,7 @@ void InitSDcard(void * parameter){
     {
       if(!SDconnection)
       {
-        ShowNotification("SD has been detected");
+
         SDconnection = true;
       }
       File FileSD = SD.open("data.txt");
@@ -82,7 +101,7 @@ void InitSDcard(void * parameter){
     {
       if(SDconnection)
       {
-        ShowNotification("SD has been detected");
+        ShowNotification("SD has been detected", 2000);
         SDconnection = false;
       }
     }
@@ -157,12 +176,17 @@ void setup()
   1,               // Task priority
   NULL             // Task handle
   );
+  
+  xTaskCreate(ReadSerialTask, "ReadSerialTask", 3000, NULL, 2, NULL);
+  xTaskCreate(InitSDcard, "InitSDcard", 2000, NULL, 1, NULL);
 
 }
 
 
 void loop(void) 
 {
+  timer.tick();
+
   tft.fillRect(0, 0, 60, 17, ILI9341_BLACK);         //Hall
   tft.fillRect(70, 40, 180, 55, ILI9341_BLACK);      //Hour
   tft.fillRect(270, 0, 320, 17, ILI9341_BLACK);      //battery %
