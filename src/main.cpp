@@ -10,6 +10,7 @@
 #include <SPI.h>
 #include <SD.h>
 #include <timer.h>
+#include <BluetoothSerial.h>
 
 auto timer = timer_create_default();
 bool SDconnection = false;
@@ -24,6 +25,7 @@ int hall = hallRead();
 String DataFromFile;
 String command;
 
+BluetoothSerial SerialBT;
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 MAX31341 rtc(true);
 MAX17055 battery;
@@ -155,6 +157,7 @@ void ReadSerialTask(void * parameter){
 void setup() 
 {
 
+  SerialBT.begin("AS_WatchV1");
   battery.setCapacity(1000);
   SOC = battery.getSOC();
   temp = bme.readTemperature();
