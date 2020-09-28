@@ -17,7 +17,6 @@ MAX31341::MAX31341(bool AD0 = true)
     {
         DeviceAdress = 0xD4;
     }
-    Wire.begin(DeviceAdress);
 }
 
 String MAX31341::GetSeconds()

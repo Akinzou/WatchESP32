@@ -11,6 +11,8 @@
 #include <SD.h>
 #include <timer.h>
 #include <BluetoothSerial.h>
+#include <ICM20600.h>
+
 
 auto timer = timer_create_default();
 bool SDconnection = false;
@@ -24,6 +26,7 @@ int SOC;
 int hall = hallRead();
 String DataFromFile;
 String command;
+
 
 BluetoothSerial SerialBT;
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
@@ -156,7 +159,6 @@ void ReadSerialTask(void * parameter){
 
 void setup() 
 {
-
   SerialBT.begin("AS_WatchV1");
   battery.setCapacity(1000);
   SOC = battery.getSOC();
