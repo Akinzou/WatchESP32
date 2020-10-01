@@ -75,7 +75,8 @@ void ReadSerial()
     }
 }
 
-void ActualizeSensors(void * parameter){
+void ActualizeSensors(void * parameter)
+{
   for(;;){ // infinite loop
     hall = hallRead();
     SOC = battery.getSOC();
@@ -87,7 +88,8 @@ void ActualizeSensors(void * parameter){
   }
 }
 
-void InitSDcard(void * parameter){
+void InitSDcard(void * parameter)
+{
   for(;;){ // infinite loop
 
     SD.begin(5);
@@ -114,7 +116,8 @@ void InitSDcard(void * parameter){
   }
 }
 
-void ReadSerialTask(void * parameter){
+void ReadSerialTask(void * parameter)
+{
   for(;;){ 
     
     command = "";
