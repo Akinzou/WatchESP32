@@ -73,6 +73,78 @@
 #define ICM20600_RESET_BIT              (1 << 0)
 #define ICM20600_DEVICE_RESET_BIT       (1 << 7)
 
+enum gyro_scale
+{
+    RANGE_250_DPS = 0,
+    RANGE_500_DPS,
+    RANGE_1K_DPS,
+    RANGE_2K_DPS,
+
+};
+
+enum acc_scale 
+{
+    RANGE_2G = 0,
+    RANGE_4G,
+    RANGE_8G,
+    RANGE_16G,
+};
+
+enum gyro_lownoise_odr 
+{
+    GYRO_RATE_8K_BW_3281 = 0,
+    GYRO_RATE_8K_BW_250,
+    GYRO_RATE_1K_BW_176,
+    GYRO_RATE_1K_BW_92,
+    GYRO_RATE_1K_BW_41,
+    GYRO_RATE_1K_BW_20,
+    GYRO_RATE_1K_BW_10,
+    GYRO_RATE_1K_BW_5,
+};
+
+enum acc_lownoise_odr 
+{
+    ACC_RATE_4K_BW_1046 = 0,
+    ACC_RATE_1K_BW_420,
+    ACC_RATE_1K_BW_218,
+    ACC_RATE_1K_BW_99,
+    ACC_RATE_1K_BW_44,
+    ACC_RATE_1K_BW_21,
+    ACC_RATE_1K_BW_10,
+    ACC_RATE_1K_BW_5,
+};
+
+enum acc_averaging_sample 
+{
+    ACC_AVERAGE_4 = 0,
+    ACC_AVERAGE_8,
+    ACC_AVERAGE_16,
+    ACC_AVERAGE_32,
+};
+
+enum gyro_averaging_sample
+{
+    GYRO_AVERAGE_1 = 0,
+    GYRO_AVERAGE_2,
+    GYRO_AVERAGE_4,
+    GYRO_AVERAGE_8,
+    GYRO_AVERAGE_16,
+    GYRO_AVERAGE_32,
+    GYRO_AVERAGE_64,
+    GYRO_AVERAGE_128,
+};
+
+enum icm20600_power 
+{
+    ICM_SLEEP_MODE = 0,
+    ICM_STANDYBY_MODE,
+    ICM_ACC_LOW_POWER,
+    ICM_ACC_LOW_NOISE,
+    ICM_GYRO_LOW_POWER,
+    ICM_GYRO_LOW_NOISE,
+    ICM_6AXIS_LOW_POWER,
+    ICM_6AXIS_LOW_NOISE,
+};
 class ICM20600
 {
 
